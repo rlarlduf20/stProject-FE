@@ -169,7 +169,7 @@ const Navbar = () => {
                         aria-labelledby="composition-button"
                         onKeyDown={handleListKeyDown}
                       >
-                        <StyledLink to="/mypage">
+                        <StyledLink to="/user/my">
                           <a>
                             <MenuItem onClick={handleClose}>My Page</MenuItem>
                           </a>
