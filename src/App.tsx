@@ -4,6 +4,7 @@ import Home from "./page/Home";
 import Layout from "./component/public/layout/Layout";
 import Signin from "./page/Signin";
 import Register from "./page/Register";
+import MyPage from "./page/MyPage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/user" element={<Home />} />
           <Route path="/user/login" element={<Signin />} />
           <Route path="/user/registration" element={<Register />} />
+          <Route path="/user/mypage" element={<MyPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

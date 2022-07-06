@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import EmailCodeTimer from "./EmailCodeTimer";
+import { useNavigate } from "react-router-dom";
+import { useTokenContext } from "../../../context/tokenState";
 
 interface IReigsterType {
   email: string;
@@ -153,8 +155,12 @@ const RegisterBox = () => {
     formState: { errors },
     watch,
   } = useForm<IReigsterType>();
-
+  const navigate = useNavigate();
   const watchEmail = watch("email");
+  const watchPassword = watch("password");
+  const watchConfirmPassword = watch("confirmPassword");
+  const { setAccessToken } = useTokenContext();
+
   //이메일 코드 전송
   const [isSendEmail, setIsSendEmail] = useState<boolean>(false);
   const [btnValue, setBtnValue] = useState<string>("코드 전송");
@@ -163,11 +169,14 @@ const RegisterBox = () => {
     setBtnValue("...");
     setDisabled(true);
     try {
-      await axios.post("http://localhost:8000/auth/send-auth-mail", {
-        email: watchEmail,
-      });
+      const req = await axios.post(
+        "http://localhost:8000/auth/send-auth-mail",
+        {
+          email: watchEmail,
+        }
+      );
       setIsSendEmail(true);
-      alert("이메일 전송 완료");
+      alert("이메일 코드 전송 완료");
       setDisabled(false);
     } catch (e) {
       alert("유효한 이메일을 입력하세요.");
@@ -180,8 +189,33 @@ const RegisterBox = () => {
   const [code, setCode] = useState<string>("");
   const onChangeCode = (e: any) => setCode(e.target.value);
   const [correctCode, setCorrectCode] = useState(false);
+  //이메일 인증 완료 후 토큰 생성
+  const [emailToken, setEmailToken] = useState<string>("");
 
-  const onSubmit = (data: IReigsterType) => console.log(data);
+  const onSubmit = async (data: IReigsterType) => {
+    if (emailToken === "") return alert("이메일 인증절차를 완료해주세요");
+    if (watchPassword !== watchConfirmPassword) {
+      return alert("비밀번호가 서로 다릅니다.");
+    }
+    let header = {
+      headers: {
+        Authorization: `Bearer ${emailToken}`,
+      },
+    };
+    try {
+      const req = await axios
+        .post("http://localhost:8000/user", data, header)
+        .then((res) => res.data);
+      console.log(req);
+      setAccessToken(req.token.access_token);
+      localStorage.setItem("access_token", req.token.access_token);
+      localStorage.setItem("refresh_token", req.token.refresh_token);
+      alert("등록 완료");
+      navigate("/user");
+    } catch (e) {
+      alert("회원가입 실패");
+    }
+  };
   return (
     <RegisterFormBox onSubmit={handleSubmit(onSubmit)}>
       <div className="row1">
@@ -209,6 +243,7 @@ const RegisterBox = () => {
               email={watchEmail}
               correctCode={correctCode}
               changeCorrectCode={() => setCorrectCode(true)}
+              setEmailToken={(token: string) => setEmailToken(token)}
             />
           </>
         ) : (

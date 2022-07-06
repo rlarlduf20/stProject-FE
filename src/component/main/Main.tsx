@@ -9,11 +9,14 @@ const StyledMainBox = styled.main`
   position: relative;
   margin-top: 5.9375rem;
   background: #f2f2f2;
-  height: 95.625rem;
+  height: auto;
+  padding-bottom: 3.125rem;
   & .main_image {
     width: 100vw;
-    height: 500px;
+    max-height: 500px;
+    height: 60vw;
     opacity: 0.85;
+    margin-bottom: 3.125rem;
   }
 `;
 const appearText = keyframes`
@@ -81,25 +84,41 @@ const StyledLink = styled(Link)`
 
 const StyledInnerBox = styled.div`
   position: relative;
-  width: 78.125rem;
+  max-width: 78.125rem;
   margin: 0 auto;
   background: white;
   padding: 3.125rem 0 3.125rem 0;
-  margin-top: 4.5rem;
-  margin-bottom: 4.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  & p {
-    font-size: 1.5625rem;
-    font-weight: bold;
-    margin-right: 1.875rem;
-  }
-  & .sub_image1 {
-  }
-  & .sub_image2 {
-    margin-top: 6.25rem;
+  .sub_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .sub_box {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      & .sub_text {
+        font-size: 1.5625rem;
+        font-weight: bold;
+        margin-right: 1.875rem;
+        @media (max-width: 50rem) {
+          font-size: 1.2rem;
+        }
+      }
+      & .sub_image1 {
+        width: 60vw;
+        @media (max-width: 50rem) {
+          width: 70vw;
+        }
+      }
+    }
+
+    & .sub_image2 {
+      margin-top: 6.25rem;
+      max-width: 60vw;
+      width: 70vw;
+    }
   }
 `;
 const Main = () => {
@@ -140,13 +159,17 @@ const Main = () => {
         ) : null}
       </StyledMainText>
       <StyledInnerBox>
-        <p>
-          Environment Technology
-          <br /> Sesearch Institute
-          <br /> Seoultech University
-        </p>
-        <img className="sub_image1" src={SubImage1} alt="서브이미지1" />
-        <img className="sub_image2" src={SubImage2} alt="서브이미지2" />
+        <div className="sub_wrapper">
+          <div className="sub_box">
+            <div className="sub_text">
+              Environment Technology
+              <br /> Sesearch Institute
+              <br /> Seoultech University
+            </div>
+            <img className="sub_image1" src={SubImage1} alt="서브이미지1" />
+          </div>
+          <img className="sub_image2" src={SubImage2} alt="서브이미지2" />
+        </div>
       </StyledInnerBox>
     </StyledMainBox>
   );

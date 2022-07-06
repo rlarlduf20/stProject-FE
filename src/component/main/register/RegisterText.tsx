@@ -22,7 +22,6 @@ const StyledRegisterText = styled.div`
     }
   }
 `;
-
 const RegisterText = () => {
   return (
     <StyledRegisterText>

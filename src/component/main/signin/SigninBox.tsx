@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useTokenContext } from "../../../context/tokenState";
 
 const StyledSigninBox = styled.form`
   position: relative;
@@ -60,7 +62,24 @@ const SigninBox = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ISignType>();
-  const onSubmit = (data: ISignType) => console.log(data);
+  const navigate = useNavigate();
+  const { setAccessToken } = useTokenContext();
+  const onSubmit = async (data: ISignType) => {
+    try {
+      const req = await axios
+        .post("http://localhost:8000/auth/login", data)
+        .then((res) => res.data);
+      console.log(req);
+      alert("로그인 성공");
+      navigate("/user");
+      setAccessToken(req.access_token);
+      localStorage.setItem("access_token", req.access_token);
+      localStorage.setItem("refresh_token", req.refresh_token);
+    } catch (e) {
+      console.log(e);
+      alert("이메일, 비밀번호를 확인해주세요");
+    }
+  };
   return (
     <StyledSigninBox onSubmit={handleSubmit(onSubmit)}>
       <p className="signin_text">로그인</p>
