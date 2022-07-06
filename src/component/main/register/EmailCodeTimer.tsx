@@ -25,6 +25,7 @@ interface ITimerType {
   email: string;
   changeCorrectCode: () => void;
   correctCode: boolean;
+  setEmailToken: any;
 }
 const EmailCodeTimer = ({
   active,
@@ -34,6 +35,7 @@ const EmailCodeTimer = ({
   email,
   changeCorrectCode,
   correctCode,
+  setEmailToken,
 }: ITimerType) => {
   const [min, setMin] = useState(3);
   const [sec, setSec] = useState(0);
@@ -41,11 +43,14 @@ const EmailCodeTimer = ({
 
   const sendCode = async () => {
     try {
-      await axios.post("http://localhost:8000/auth/check-auth-code", {
-        code: code,
-        email: email,
-      });
+      const req = await axios
+        .post("http://localhost:8000/auth/check-auth-code", {
+          code: code,
+          email: email,
+        })
+        .then((res) => res.data);
       alert("코드 확인 완료");
+      setEmailToken(req.access_token);
       changeCorrectCode();
       setStopTimer(true);
     } catch (e) {
