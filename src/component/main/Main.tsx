@@ -40,27 +40,53 @@ const appearButton = keyframes`
 `;
 const StyledMainText = styled.div`
   position: absolute;
-  top: 6.5625rem;
-  right: 31.25rem;
+  top: 30vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  @media (max-width: 40.625rem) {
+    top: 18vh;
+  }
+  @media (max-width: 25rem) {
+    top: 15vh;
+  }
   .main_text {
     font-size: 1.75rem;
     text-align: right;
     line-height: 2.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 0.125rem;
     animation: ${appearText} 1.5s;
+    @media (max-width: 50rem) {
+      font-size: 1.5rem;
+    }
+    @media (max-width: 40.625rem) {
+      font-size: 1rem;
+      line-height: 2rem;
+    }
+    @media (max-width: 30rem) {
+      font-size: 0.7rem;
+      line-height: 1.5rem;
+    }
   }
-  button {
+  .dataBtn {
     position: absolute;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    font-size: 1rem;
+    color: green;
+    cursor: pointer;
+    @media (max-width: 40.625rem) {
+      padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+      font-size: 0.5rem;
+    }
     right: 0;
     padding: 0.3125rem 1.25rem 0.3125rem 1.25rem;
     border: 0.125rem solid green;
     border-radius: 3.125rem;
     animation: ${appearButton} 1.5s;
   }
-  button:hover {
+  .dataBtn:hover {
     position: absolute;
     display: inline-flex;
     justify-content: center;
@@ -69,6 +95,7 @@ const StyledMainText = styled.div`
     padding: 0.3125rem 1.25rem 0.3125rem 1.25rem;
     border: 0.125rem solid white;
     background: #8fbc8f;
+    color: white;
     border-radius: 3.125rem;
   }
 `;
@@ -151,11 +178,13 @@ const Main = () => {
           </p>
         ) : null}
         {isButtonLoading ? (
-          <button>
-            <StyledLink to="/data">
-              지금 바로 우리지역 환경데이터를 확인해보세요
-            </StyledLink>
-          </button>
+          <StyledLink to="/data">
+            <input
+              type="button"
+              value="지금 바로 우리지역 환경데이터를 확인해보세요"
+              className="dataBtn"
+            />
+          </StyledLink>
         ) : null}
       </StyledMainText>
       <StyledInnerBox>

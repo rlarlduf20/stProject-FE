@@ -14,30 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Avatar from "@mui/material/Avatar";
 
-const StyledNav = styled.nav`
-  position: relative;
-  width: 78.125rem;
-  height: 100%;
-  margin: 0 auto;
-  align-items: center;
-  display: flex;
-  .navbox {
-    position: absolute;
-    right: 5%;
-    .navboxItem {
-      display: inline-block;
-      margin-right: 30px;
-    }
-  }
-  .data {
-    position: absolute;
-    right: 10%;
-  }
-  .signin {
-    position: absolute;
-    right: 0;
-  }
-`;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
@@ -51,12 +27,82 @@ const StyledLink = styled(Link)`
   }
   .home_button {
     margin-left: 2.3rem;
-    margin-right: 38px;
+    margin-right: 2.375rem;
     display: inline-block;
     font-weight: bold;
     font-size: 1.1875rem;
   }
 `;
+
+const StyledNav = styled.nav`
+  position: relative;
+  max-width: 78.125rem;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  .navbox {
+    @media (max-width: 850px) {
+      display: none;
+    }
+    position: absolute;
+    right: 5%;
+    .navboxItem {
+      display: inline-block;
+      margin-right: 30px;
+    }
+  }
+  .dropdown {
+    display: none;
+    position: absolute;
+    right: 25%;
+    @media (max-width: 850px) {
+      display: inline-block;
+    }
+    .dropbtn {
+      border: none;
+      border-bottom: 0.125rem solid green;
+      color: green;
+      background: white;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 1rem 0.875rem 1rem 0.875rem;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: #f1f1f1;
+      min-width: 10rem;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      ${StyledLink} {
+        color: black;
+        padding: 12px 14px;
+        display: block;
+        &:hover {
+          background: #ddd;
+        }
+      }
+    }
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown:hover .dropbtn {
+    color: white;
+    cursor: pointer;
+    background: #8fbc8f;
+    border: 0.125rem solid white;
+  }
+  .data {
+    position: absolute;
+    right: 20%;
+  }
+  .signin {
+    position: absolute;
+    right: 0;
+  }
+`;
+
 const navboxItem = [
   { text: "data", link: "/data" },
   { text: "소개", link: "#" },
@@ -133,6 +179,16 @@ const Navbar = () => {
                 <StyledLink to={list.link}>{list.text}</StyledLink>
               </div>
             ))}
+          </div>
+          <div className="dropdown">
+            <button className="dropbtn">Menu</button>
+            <div className="dropdown-content">
+              {navboxItem.map((list, index) => (
+                <StyledLink key={index} to={list.link}>
+                  {list.text}
+                </StyledLink>
+              ))}
+            </div>
           </div>
           <div className="signin">
             <Button
