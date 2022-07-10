@@ -2,12 +2,26 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const EditInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .checkpw {
+    line-height: 70vh;
+  }
+  .edittext {
+    margin-top: 200px;
+  }
   input {
     width: 17.8125rem;
     padding: 1.125rem 0 1.125rem 0.9375rem;
+    outline: none;
+    border: 0.0625rem solid #e2e2e2;
+    border-radius: 0.625rem;
+    box-sizing: border-box;
     &:focus {
       outline: none;
-      border: 1px solid #8fbc8f;
+      border: 2px solid #8fbc8f;
+      box-sizing: border-box;
     }
   }
   span {
@@ -81,8 +95,10 @@ const EditInfo = () => {
     <EditInfoBox>
       {isAuthToEdit ? (
         <>
-          <span>*내 정보 수정</span>
-          <button>수정하기</button>
+          <div className="edittext">
+            <span>*내 정보 수정</span>
+            <button>수정하기</button>
+          </div>
           <div className="row1">
             <input
               type="email"
@@ -128,7 +144,7 @@ const EditInfo = () => {
           </div>
         </>
       ) : (
-        <>
+        <div className="checkpw">
           <input
             type="password"
             placeholder="비밀번호"
@@ -138,7 +154,7 @@ const EditInfo = () => {
           <button onClick={onClick} className="submit">
             확인하기
           </button>
-        </>
+        </div>
       )}
     </EditInfoBox>
   );
