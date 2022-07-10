@@ -224,6 +224,7 @@ const RegisterBox = () => {
           placeholder="이메일 *"
           type="email"
           className="email"
+          disabled={correctCode}
         />
         {isSendEmail ? (
           <>

@@ -5,30 +5,31 @@ import EditInfo from "./EditInfo";
 import EditPw from "./EditPw";
 
 const MypageContainer = styled.div`
-  //background: #f8fff0;
   margin-top: 5.9375rem;
 `;
 const MyPageInnerBox = styled.div`
   width: 1250px;
   margin: 0 auto;
-  background: white;
   min-height: calc(100vh - 7.3125rem - 5.9375rem);
   display: flex;
-  align-items: center;
-  gap: 18.75rem;
+  .right_side {
+    flex-grow: 1;
+  }
 `;
+
 const MypageSideBtn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3125rem;
+  justify-content: center;
+  gap: 1rem;
 `;
 export const StyledLabel = styled.label`
   display: block;
-  font-size: 25px;
+  font-size: 2.1875rem;
   color: #e2e2e2;
   height: 100%;
   cursor: pointer;
-  width: 200px;
+  width: 12.5rem;
 `;
 export const StyledRadio = styled.input`
   display: none;
@@ -83,13 +84,15 @@ const MyPageMain = () => {
             <StyledLabel htmlFor="pw">비밀번호 변경</StyledLabel>
           </div>
         </MypageSideBtn>
-        {radioValue === "default" ? (
-          <UserInfo />
-        ) : radioValue === "editInfo" ? (
-          <EditInfo />
-        ) : (
-          <EditPw />
-        )}
+        <div className="right_side">
+          {radioValue === "default" ? (
+            <UserInfo />
+          ) : radioValue === "editInfo" ? (
+            <EditInfo />
+          ) : (
+            <EditPw />
+          )}
+        </div>
       </MyPageInnerBox>
     </MypageContainer>
   );
