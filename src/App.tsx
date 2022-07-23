@@ -5,6 +5,7 @@ import Layout from "./component/public/layout/Layout";
 import Signin from "./page/Signin";
 import Register from "./page/Register";
 import MyPage from "./page/MyPage";
+import NoticeBoard from "./page/NoticeBoard";
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
           <Route path="/user" element={<Home />} />
           <Route path="/user/login" element={<Signin />} />
           <Route path="/user/registration" element={<Register />} />
-          <Route path="/user/my" element={<MyPage />}></Route>
+          <Route path="/user/my" element={<MyPage />} />
+          <Route path="/user/noticeb" element={<NoticeBoard />} />
         </Route>
       </Routes>
     </BrowserRouter>

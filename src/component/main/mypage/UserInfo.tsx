@@ -8,7 +8,7 @@ const UserInfoDiv = styled.div`
   align-items: center;
   h1 {
     font-size: 1.5rem;
-    margin: 9.375rem 0 6.25rem 0;
+    margin: 9.375rem 0 4.5rem 0;
     font-weight: 700;
   }
   label {

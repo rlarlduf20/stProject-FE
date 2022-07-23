@@ -8,7 +8,7 @@ const MypageContainer = styled.div`
   margin-top: 5.9375rem;
 `;
 const MyPageInnerBox = styled.div`
-  width: 1250px;
+  width: 78.125rem;
   margin: 0 auto;
   min-height: calc(100vh - 7.3125rem - 5.9375rem);
   display: flex;
