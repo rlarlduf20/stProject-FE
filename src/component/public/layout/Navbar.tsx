@@ -109,7 +109,7 @@ const navboxItem = [
   { text: "공지사항", link: "/user/noticeb" },
   { text: "자료실", link: "#" },
   { text: "환경오염신고", link: "#" },
-  { text: "자유게시판", link: "#" },
+  { text: "자유게시판", link: "/user/freeb" },
   { text: "질문과답변", link: "#" },
 ];
 const Navbar = () => {

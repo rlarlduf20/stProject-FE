@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 import NoticeBoardList from "./NoticeBoardList";
-import CreateIcon from "@mui/icons-material/Create";
 import Pagination from "@mui/material/Pagination";
-import SearchIcon from "@mui/icons-material/Search";
+import TableType from "../../public/common/table/TableType";
+import TableSearch from "../../public/common/table/TableSearch";
 
 const NoticeMainContainer = styled.main`
   margin-top: 5.9375rem;
@@ -12,40 +12,6 @@ const NoticeInnerContainer = styled.div`
   min-height: calc(100vh - 9.375rem - 7.3125rem);
   max-width: 62.5rem;
   margin: 0 auto;
-  .title {
-    margin-top: 9.375rem;
-    border-bottom: 1px solid black;
-    display: flex;
-    align-items: center;
-    .title_text {
-      color: white;
-      font-size: 1.5rem;
-      display: inline-block;
-      background: #8fbc8f;
-      padding: 1.25rem;
-      border-radius: 1.25rem 1.25rem 0 0;
-    }
-    .none {
-      flex-grow: 1;
-    }
-    .post {
-      display: inline-block;
-      width: 26px;
-      height: 26px;
-      overflow: auto;
-      border: 1px solid #e2e2e2;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: width 0.2s;
-      .create {
-        display: inline-block;
-      }
-      &:hover {
-        width: 67px;
-      }
-    }
-  }
-
   .th {
     display: flex;
     padding: 0.9375rem;
@@ -83,32 +49,7 @@ const NoticeInnerContainer = styled.div`
   .page {
     display: flex;
     justify-content: center;
-    padding: 48px 0 48px 0;
-  }
-  .search {
-    display: flex;
-    justify-content: center;
-    .search_type {
-      display: inline-block;
-      border: 1px solid #e2e2e2;
-      font-size: 14px;
-      display: flex;
-      padding: 0 5px 0 5px;
-      align-items: center;
-    }
-    .search_input {
-      padding: 10px 0 10px 10px;
-      border: 1px solid #e2e2e2;
-      outline: none;
-    }
-    .search_button {
-      background: #e2e2e2;
-      cursor: pointer;
-      border: 1px solid #e2e2e2;
-      &:hover {
-        background: #8fbc8f;
-      }
-    }
+    padding: 48px 0 0 0;
   }
 `;
 const NoticeBoardMain = () => {
@@ -127,19 +68,26 @@ const NoticeBoardMain = () => {
       date: "7.11",
       view: 18,
     },
+    {
+      indexNo: 3,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 4,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
   ]);
 
   return (
     <NoticeMainContainer>
       <NoticeInnerContainer>
-        <div className="title">
-          <p className="title_text">공지사항</p>
-          <div className="none"></div>
-          <div className="post">
-            <CreateIcon />
-            <span className="create">글쓰기</span>
-          </div>
-        </div>
+        <TableType title="공지사항" />
         <div className="th">
           <div className="th_indexNo">No.</div>
           <div className="th_title">제목</div>
@@ -162,17 +110,7 @@ const NoticeBoardMain = () => {
             showLastButton
           />
         </div>
-        <div className="search">
-          <div className="search_type">제목</div>
-          <input
-            type="text"
-            className="search_input"
-            placeholder="검색어를 입력하세요"
-          />
-          <button className="search_button">
-            <SearchIcon />
-          </button>
-        </div>
+        <TableSearch />
       </NoticeInnerContainer>
     </NoticeMainContainer>
   );

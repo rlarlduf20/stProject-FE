@@ -6,6 +6,7 @@ import Signin from "./page/Signin";
 import Register from "./page/Register";
 import MyPage from "./page/MyPage";
 import NoticeBoard from "./page/NoticeBoard";
+import FreeBoard from "./page/FreeBoard";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/user/registration" element={<Register />} />
           <Route path="/user/my" element={<MyPage />} />
           <Route path="/user/noticeb" element={<NoticeBoard />} />
+          <Route path="/user/freeb" element={<FreeBoard />} />
         </Route>
       </Routes>
     </BrowserRouter>
