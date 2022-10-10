@@ -5,7 +5,7 @@ const EditPwBox = styled.div`
   flex-direction: column;
   align-items: center;
   p {
-    margin-top: 250px;
+    margin-top: 12.5rem;
   }
   input {
     width: 17.8125rem;
@@ -23,6 +23,10 @@ const EditPwBox = styled.div`
   p {
     margin-bottom: 1.875rem;
   }
+  .currPw {
+    display: block;
+    margin-bottom: 0.8rem;
+  }
   .newPw {
     display: block;
     margin-bottom: 0.8rem;
@@ -36,6 +40,11 @@ const EditPw = () => {
   return (
     <EditPwBox>
       <p>*비밀번호 변경하기</p>
+      <input
+        placeholder="current password"
+        className="currPw"
+        type="password"
+      />
       <input placeholder="new password" className="newPw" type="password" />
       <input
         placeholder="confirm new password"

@@ -4,8 +4,11 @@ import styled from "styled-components";
 const StyledFooter = styled.footer`
   width: 100vw;
   margin: 0 auto;
-  margin-bottom: 6.25rem;
-  border-top: 0.0625rem solid #e2e2e2;x
+  padding-bottom: 6.25rem;
+  border-top: 0.0625rem solid #e2e2e2;
+  @media (max-width: 600px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const Footer = () => {

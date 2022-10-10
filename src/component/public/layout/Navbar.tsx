@@ -106,10 +106,10 @@ const StyledNav = styled.nav`
 const navboxItem = [
   { text: "data", link: "/data" },
   { text: "소개", link: "#" },
-  { text: "공지사항", link: "#" },
+  { text: "공지사항", link: "/user/noticeb" },
   { text: "자료실", link: "#" },
   { text: "환경오염신고", link: "#" },
-  { text: "자유게시판", link: "#" },
+  { text: "자유게시판", link: "/user/freeb" },
   { text: "질문과답변", link: "#" },
 ];
 const Navbar = () => {
@@ -164,7 +164,6 @@ const Navbar = () => {
       alert("로그아웃 실패");
     }
   };
-  console.log(accessToken);
   return (
     <StyledNav>
       <StyledLink to="/user">

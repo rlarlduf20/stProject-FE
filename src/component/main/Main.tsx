@@ -40,7 +40,7 @@ const appearButton = keyframes`
 `;
 const StyledMainText = styled.div`
   position: absolute;
-  top: 30vh;
+  top: 25vh;
   left: 50vw;
   transform: translate(-50%, -50%);
   @media (max-width: 40.625rem) {
@@ -134,7 +134,7 @@ const StyledInnerBox = styled.div`
         }
       }
       & .sub_image1 {
-        width: 60vw;
+        width: 40vw;
         @media (max-width: 50rem) {
           width: 70vw;
         }
@@ -143,8 +143,8 @@ const StyledInnerBox = styled.div`
 
     & .sub_image2 {
       margin-top: 6.25rem;
-      max-width: 60vw;
-      width: 70vw;
+      max-width: 50vw;
+      width: 60vw;
     }
   }
 `;
