@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, SyntheticEvent } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Mark from "../../../image/seoultechMark.jpeg";
-import { useTokenContext } from "../../../context/tokenState";
+import { useTokenContext } from "../../../../context/tokenState";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";

@@ -1,4 +1,4 @@
-import NoticeBoardMain from "../component/main/notice_board/NoticeBoardMain";
+import NoticeBoardMain from "../component/main/notice_board";
 
 const NoticeBoard = () => {
   return <NoticeBoardMain />;

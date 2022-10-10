@@ -1,5 +1,5 @@
 import React from "react";
-import SigninMain from "../component/main/signin/SigninMain";
+import SigninMain from "../component/main/signin";
 
 const Signin = () => {
   return <SigninMain />;
