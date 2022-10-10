@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
-const NoticeBoardListBox = styled.div`
+const BoardListBox = styled.div`
   display: flex;
   padding: 0.9375rem;
   border-bottom: 0.0625rem solid #e2e2e2;
@@ -39,16 +40,16 @@ interface ListType {
   };
 }
 
-const NoticeBoardList = ({ list }: ListType) => {
+const TableList = ({ list }: ListType) => {
   return (
-    <NoticeBoardListBox>
+    <BoardListBox>
       <div className="tr_indexNo">{list.indexNo}</div>
       <div className="tr_title">{list.title}</div>
       <div className="tr_writer">{list.writer}</div>
       <div className="tr_date">{list.date}</div>
       <div className="tr_view">{list.view}</div>
-    </NoticeBoardListBox>
+    </BoardListBox>
   );
 };
 
-export default NoticeBoardList;
+export default TableList;

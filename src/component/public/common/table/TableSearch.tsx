@@ -12,16 +12,19 @@ const TableSearchBox = styled.div`
     display: flex;
     padding: 0 5px 0 5px;
     align-items: center;
+    margin-bottom: 48px;
   }
   .search_input {
     padding: 10px 0 10px 10px;
     border: 1px solid #e2e2e2;
     outline: none;
+    margin-bottom: 48px;
   }
   .search_button {
     background: #e2e2e2;
     cursor: pointer;
     border: 1px solid #e2e2e2;
+    margin-bottom: 48px;
     &:hover {
       background: #8fbc8f;
     }

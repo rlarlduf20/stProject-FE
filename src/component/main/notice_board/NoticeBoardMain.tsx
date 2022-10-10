@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useState } from "react";
-import NoticeBoardList from "./NoticeBoardList";
-import Pagination from "@mui/material/Pagination";
+import { useEffect, useState } from "react";
+import TableList from "../../public/common/table/TableList";
 import TableType from "../../public/common/table/TableType";
 import TableSearch from "../../public/common/table/TableSearch";
+import TablePagination from "../../public/common/table/TablePagination";
 
 const NoticeMainContainer = styled.main`
   margin-top: 5.9375rem;
@@ -46,11 +46,6 @@ const NoticeInnerContainer = styled.div`
       }
     }
   }
-  .page {
-    display: flex;
-    justify-content: center;
-    padding: 48px 0 0 0;
-  }
 `;
 const NoticeBoardMain = () => {
   const [tableList, setTableList] = useState([
@@ -75,6 +70,7 @@ const NoticeBoardMain = () => {
       date: "7.11",
       view: 18,
     },
+
     {
       indexNo: 4,
       title: "백엔드 네스트",
@@ -82,34 +78,90 @@ const NoticeBoardMain = () => {
       date: "7.11",
       view: 18,
     },
+    {
+      indexNo: 5,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 6,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 7,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 8,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 9,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 10,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 11,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 12,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
+    {
+      indexNo: 13,
+      title: "백엔드 네스트",
+      writer: "minjun@google.com",
+      date: "7.11",
+      view: 18,
+    },
   ]);
+
+  const [totalPage, setTotalPage] = useState(1);
+  useEffect(() => {
+    setTotalPage(Math.trunc((tableList.length - 1) / 5 + 1));
+  }, [tableList]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageChange = (p: number) => {
+    setCurrentPage(p);
+  };
 
   return (
     <NoticeMainContainer>
       <NoticeInnerContainer>
         <TableType title="공지사항" />
-        <div className="th">
-          <div className="th_indexNo">No.</div>
-          <div className="th_title">제목</div>
-          <div className="th_writer">작성자</div>
-          <div className="th_date">날짜</div>
-          <div className="th_view">조회</div>
-        </div>
-
-        {tableList.map((list, index: number) => (
-          <NoticeBoardList key={index} list={list} />
-        ))}
-
-        <div className="page">
-          <Pagination
-            count={10}
-            color="primary"
-            shape="rounded"
-            size="small"
-            showFirstButton
-            showLastButton
-          />
-        </div>
+        {tableList
+          .slice((currentPage - 1) * 5, (currentPage - 1) * 5 + 5)
+          .map((list, index: number) => (
+            <TableList key={index} list={list} />
+          ))}
+        <TablePagination totalPage={totalPage} pageChange={pageChange} />
         <TableSearch />
       </NoticeInnerContainer>
     </NoticeMainContainer>
