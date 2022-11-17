@@ -1,7 +1,5 @@
-import React from "react";
 import RegisterText from "./RegisterText";
 import RegisterBox from "./RegisterBox";
-import { autocompleteClasses } from "@mui/material";
 
 const RegisterMain = () => {
   return (

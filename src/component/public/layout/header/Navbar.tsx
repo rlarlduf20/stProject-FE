@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, SyntheticEvent } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Mark from "../../../image/seoultechMark.jpeg";
+import Mark from "../../../../image/seoultechMark.jpeg";
 import { useTokenContext } from "../../../../context/tokenState";
-import axios from "axios";
+import useAxios from "../../../../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -107,10 +107,10 @@ const navboxItem = [
   { text: "data", link: "/data" },
   { text: "소개", link: "#" },
   { text: "공지사항", link: "/user/noticeb" },
-  { text: "자료실", link: "#" },
-  { text: "환경오염신고", link: "#" },
+  { text: "자료실", link: "/user/referb" },
+  { text: "환경오염신고", link: "/user/reportb" },
   { text: "자유게시판", link: "/user/freeb" },
-  { text: "질문과답변", link: "#" },
+  { text: "QnA", link: "/user/qnab" },
 ];
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -152,14 +152,16 @@ const Navbar = () => {
 
   const onClickLogout = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/auth/logout", {
+      const res = await useAxios.post("/auth/logout", {
         refresh_token: localStorage.getItem("refresh_token"),
       });
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
       setAccessToken("");
-      alert("로그아웃 성공");
+      alert("로그아웃!");
       navigate("/user");
+      window.location.reload();
+      window.history.forward();
     } catch (e) {
       alert("로그아웃 실패");
     }
