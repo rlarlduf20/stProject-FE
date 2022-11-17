@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CreateIcon from "@mui/icons-material/Create";
+import { useNavigate } from "react-router-dom";
 
 const TableTypeHeader = styled.div`
   margin-top: 9.375rem;
@@ -77,8 +78,13 @@ const TableTypeTitle = styled.div`
 `;
 interface TableTypeType {
   title: string;
+  route: string;
 }
-const TableType = ({ title }: TableTypeType) => {
+const TableType = ({ title, route }: TableTypeType) => {
+  const navigate = useNavigate();
+  const onClickRoute = () => {
+    navigate(`/${route}`);
+  };
   return (
     <>
       <TableTypeHeader>
@@ -87,7 +93,9 @@ const TableType = ({ title }: TableTypeType) => {
 
         <div className="post">
           <CreateIcon />
-          <div className="create">글쓰기</div>
+          <div className="create" onClick={onClickRoute}>
+            글쓰기
+          </div>
         </div>
       </TableTypeHeader>
       <TableTypeTitle>

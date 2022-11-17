@@ -153,7 +153,7 @@ const NoticeBoardMain = () => {
   return (
     <BoardMainContainer>
       <BoardInnerContainer>
-        <TableType title="공지사항" />
+        <TableType title="공지사항" route="noticeRegi" />
         {tableList
           .slice((currentPage - 1) * 5, (currentPage - 1) * 5 + 5)
           .map((list, index: number) => (

@@ -19,7 +19,7 @@ const QnABoardMain = () => {
   return (
     <BoardMainContainer>
       <BoardInnerContainer>
-        <TableType title="QnA" />
+        <TableType title="QnA" route="qnaRegi" />
         {tableList.map((list, index: number) => (
           <TableList key={index} list={list} />
         ))}

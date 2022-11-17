@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import useAxios from "../../../hooks/useAxios";
 import { useTokenContext } from "../../../context/tokenState";
+import axios from "axios";
 
 const StyledSigninBox = styled.form`
   position: relative;
@@ -65,8 +65,8 @@ const SigninBox = () => {
   const { setAccessToken } = useTokenContext();
   const onSubmit = async (data: ISignType) => {
     try {
-      const req = await useAxios
-        .post("/auth/login", data)
+      const req = await axios
+        .post(`${process.env.REACT_APP_SERVER}/auth/login`, data)
         .then((res) => res.data);
       alert("로그인 성공");
       navigate("/user");

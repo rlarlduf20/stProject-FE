@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./page";
 import Layout from "./component/public/layout";
@@ -10,7 +9,12 @@ import FreeBoard from "./page/board/FreeBoard";
 import ReferBoard from "./page/board/ReferBoard";
 import ReportBoard from "./page/board/ReportBoard";
 import QnABoard from "./page/board/QnABoard";
-import ArticleRegi from "./page/board/ArticleRegi";
+import ArticleRegi from "./component/main/board/ArticleRegi";
+import FreeRegi from "./page/board/regi/FreeRegi";
+import NoticeRegi from "./page/board/regi/NoticeRegi";
+import ReferRegi from "./page/board/regi/ReferRegi";
+import ReportRegi from "./page/board/regi/ReportRegi";
+import QnARegi from "./page/board/regi/QnARegi";
 
 const App = () => {
   return (
@@ -26,8 +30,12 @@ const App = () => {
           <Route path="/user/reportb" element={<ReportBoard />} />
           <Route path="/user/freeb" element={<FreeBoard />} />
           <Route path="/user/qnab" element={<QnABoard />} />
+          <Route path="/noticeRegi" element={<NoticeRegi />} />
+          <Route path="/referRegi" element={<ReferRegi />} />
+          <Route path="/reportRegi" element={<ReportRegi />} />
+          <Route path="/freeRegi" element={<FreeRegi />} />
+          <Route path="/qnaRegi" element={<QnARegi />} />
         </Route>
-        <Route path="/articleRegi" element={<ArticleRegi />} />
       </Routes>
     </BrowserRouter>
   );

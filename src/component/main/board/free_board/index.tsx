@@ -56,7 +56,7 @@ const FreeBoardMain = () => {
   return (
     <BoardMainContainer>
       <BoardInnerContainer>
-        <TableType title="자유게시판" />
+        <TableType title="자유게시판" route="freeRegi" />
         {tableList.map((list, index: number) => (
           <TableList key={index} list={list} />
         ))}

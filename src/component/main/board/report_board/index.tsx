@@ -19,7 +19,7 @@ const ReportBoardMain = () => {
   return (
     <BoardMainContainer>
       <BoardInnerContainer>
-        <TableType title="환경오염신고" />
+        <TableType title="환경오염신고" route="qnaRegi" />
         {tableList.map((list, index: number) => (
           <TableList key={index} list={list} />
         ))}

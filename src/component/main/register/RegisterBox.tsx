@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import useAxios from "../../../hooks/useAxios";
 import EmailCodeTimer from "./EmailCodeTimer";
 import { useNavigate } from "react-router-dom";
 import { useTokenContext } from "../../../context/tokenState";
+import axios from "axios";
 
 interface IReigsterType {
   email: string;
@@ -169,7 +169,7 @@ const RegisterBox = () => {
     setBtnValue("...");
     setDisabled(true);
     try {
-      await useAxios.post("/auth/send-auth-mail", {
+      await axios.post(`${process.env.REACT_APP_SERVER}/auth/send-auth-mail`, {
         email: watchEmail,
       });
       setIsSendEmail(true);
@@ -200,8 +200,8 @@ const RegisterBox = () => {
       },
     };
     try {
-      const req = await useAxios
-        .post("/user", data, header)
+      const req = await axios
+        .post(`${process.env.REACT_APP_SERVER}/user`, data, header)
         .then((res) => res.data);
       setAccessToken(req.token.access_token);
       localStorage.setItem("access_token", req.token.access_token);

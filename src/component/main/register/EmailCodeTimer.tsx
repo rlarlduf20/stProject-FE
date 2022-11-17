@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import useAxios from "../../../hooks/useAxios";
+import axios from "axios";
 
 const Timer = styled.input`
   color: green;
@@ -43,8 +43,8 @@ const EmailCodeTimer = ({
 
   const sendCode = async () => {
     try {
-      const req = await useAxios
-        .post("/auth/check-auth-code", {
+      const req = await axios
+        .post(`${process.env.REACT_APP_SERVER}/auth/check-auth-code`, {
           code: code,
           email,
         })

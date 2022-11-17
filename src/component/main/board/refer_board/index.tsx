@@ -19,7 +19,7 @@ const ReferBoardMain = () => {
   return (
     <BoardMainContainer>
       <BoardInnerContainer>
-        <TableType title="자료실" />
+        <TableType title="자료실" route="referRegi" />
         {tableList.map((list, index: number) => (
           <TableList key={index} list={list} />
         ))}

@@ -228,10 +228,12 @@ const Navbar = () => {
                       >
                         <StyledLink to="/user/my">
                           <a>
-                            <MenuItem onClick={handleClose}>My Page</MenuItem>
+                            <MenuItem onClick={handleClose}>
+                              마이페이지
+                            </MenuItem>
                           </a>
                         </StyledLink>
-                        <MenuItem onClick={onClickLogout}>Logout</MenuItem>
+                        <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
                       </MenuList>
                     </ClickAwayListener>
                   </Paper>
