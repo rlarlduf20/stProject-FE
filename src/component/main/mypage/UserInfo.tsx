@@ -3,13 +3,15 @@ import styled from "styled-components";
 const UserInfoDiv = styled.div`
   line-height: 50px;
   letter-spacing: 3px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   h1 {
     font-size: 1.5rem;
-    margin: 9.375rem 0 4.5rem 0;
-    font-weight: 700;
+    margin-bottom: 4.5rem;
+    font-weight: 600;
+    text-align: center;
+    span {
+      color: green;
+      font-weight: 900;
+    }
   }
   label {
     display: inline-block;
@@ -27,11 +29,17 @@ const UserInfoDiv = styled.div`
   }
 `;
 
-const UserInfo = () => {
+const UserInfo = ({ myInfo }: { myInfo: any }) => {
   return (
     <UserInfoDiv>
       <div className="title">
-        <h1>김기열님 환영합니다</h1>
+        <h1>
+          <span>
+            {myInfo.last_name}
+            {myInfo.first_name}
+          </span>
+          님 환영합니다
+        </h1>
       </div>
       <div className="content">
         <div className="email">
@@ -40,7 +48,7 @@ const UserInfo = () => {
             id="email"
             name="email"
             type="text"
-            value="kky8274@naver.com"
+            value={myInfo.email}
             disabled
           />
         </div>
@@ -50,13 +58,19 @@ const UserInfo = () => {
             id="phone"
             name="phone"
             type="text"
-            value="010-1111-2222"
+            value={myInfo.phone}
             disabled
           />
         </div>
         <div className="city">
           <label htmlFor="city">거주도시</label>
-          <input id="city" name="city" type="text" value="서울시" disabled />
+          <input
+            id="city"
+            name="city"
+            type="text"
+            value={myInfo.city}
+            disabled
+          />
         </div>
         <div className="address">
           <label htmlFor="address">주소</label>
@@ -64,7 +78,7 @@ const UserInfo = () => {
             id="address"
             name="address"
             type="text"
-            value="공릉동 해오름 가동"
+            value={myInfo.address}
             disabled
           />
         </div>

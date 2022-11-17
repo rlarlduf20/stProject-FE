@@ -44,9 +44,9 @@ const EmailCodeTimer = ({
   const sendCode = async () => {
     try {
       const req = await axios
-        .post("http://localhost:8000/auth/check-auth-code", {
+        .post(`${process.env.REACT_APP_SERVER}/auth/check-auth-code`, {
           code: code,
-          email: email,
+          email,
         })
         .then((res) => res.data);
       alert("코드 확인 완료");

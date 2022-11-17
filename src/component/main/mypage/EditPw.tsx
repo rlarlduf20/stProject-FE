@@ -4,9 +4,6 @@ const EditPwBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  p {
-    margin-top: 12.5rem;
-  }
   input {
     width: 17.8125rem;
     padding: 1.125rem 0 1.125rem 0.9375rem;
@@ -33,6 +30,19 @@ const EditPwBox = styled.div`
   }
   .confirmNewPw {
     display: block;
+    margin-bottom: 0.8rem;
+  }
+  .editBtn {
+    background-color: #8fbc8f;
+    color: white;
+    width: 17.8125rem;
+    padding: 1.125rem 0;
+    text-align: center;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    &:hover {
+      background-color: green;
+    }
   }
 `;
 
@@ -51,6 +61,7 @@ const EditPw = () => {
         className="confirmNewPw"
         type="password"
       />
+      <div className="editBtn">변경하기</div>
     </EditPwBox>
   );
 };

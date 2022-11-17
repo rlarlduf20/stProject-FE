@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import EmailCodeTimer from "./EmailCodeTimer";
 import { useNavigate } from "react-router-dom";
 import { useTokenContext } from "../../../context/tokenState";
+import axios from "axios";
 
 interface IReigsterType {
   email: string;
@@ -169,12 +169,9 @@ const RegisterBox = () => {
     setBtnValue("...");
     setDisabled(true);
     try {
-      const req = await axios.post(
-        "http://localhost:8000/auth/send-auth-mail",
-        {
-          email: watchEmail,
-        }
-      );
+      await axios.post(`${process.env.REACT_APP_SERVER}/auth/send-auth-mail`, {
+        email: watchEmail,
+      });
       setIsSendEmail(true);
       alert("이메일 코드 전송 완료");
       setDisabled(false);
@@ -204,15 +201,15 @@ const RegisterBox = () => {
     };
     try {
       const req = await axios
-        .post("http://localhost:8000/user", data, header)
+        .post(`${process.env.REACT_APP_SERVER}/user`, data, header)
         .then((res) => res.data);
-      console.log(req);
       setAccessToken(req.token.access_token);
       localStorage.setItem("access_token", req.token.access_token);
       localStorage.setItem("refresh_token", req.token.refresh_token);
       alert("등록 완료");
       navigate("/user");
     } catch (e) {
+      console.error(e);
       alert("회원가입 실패");
     }
   };
@@ -224,7 +221,7 @@ const RegisterBox = () => {
           placeholder="이메일 *"
           type="email"
           className="email"
-          disabled={correctCode}
+          disabled={isSendEmail}
         />
         {isSendEmail ? (
           <>

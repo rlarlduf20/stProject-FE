@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import useAxios from "../../../hooks/useAxios";
 
 const EditInfoBox = styled.div`
   display: flex;
@@ -7,9 +8,6 @@ const EditInfoBox = styled.div`
   align-items: center;
   .checkpw {
     line-height: 70vh;
-  }
-  .edittext {
-    margin-top: 200px;
   }
   input {
     width: 17.8125rem;
@@ -78,17 +76,57 @@ const EditInfoBox = styled.div`
   }
 `;
 
-const EditInfo = () => {
+const EditInfo = ({ myInfo }: { myInfo: any }) => {
   const [isAuthToEdit, setIsAuthToEdit] = useState(false);
   const [password, setPassword] = useState("");
   const onChangePw = (e: any) => {
     setPassword(e.target.value);
   };
-  const onClick = () => {
-    if (password === "1111") {
+  const onClickPw = async () => {
+    try {
+      await useAxios.post("/auth/login", {
+        email: myInfo.email,
+        password,
+      });
       setIsAuthToEdit(true);
-    } else {
-      alert("비밀번호가 틀립니다.");
+    } catch (e) {
+      alert("비밀번호를 확인해주세요.");
+    }
+  };
+
+  const [first, setFirst] = useState(myInfo.first_name);
+  const [last, setLast] = useState(myInfo.last_name);
+  const [email, setEmail] = useState(myInfo.email);
+  const [phone, setPhone] = useState(myInfo.phone);
+  const [city, setCity] = useState(myInfo.city);
+  const [address, setAddress] = useState(myInfo.address);
+  const onClickEdit = async () => {
+    if (
+      first === null ||
+      last === null ||
+      phone === null ||
+      city === null ||
+      address === null
+    ) {
+      alert("모든 입력란을 채워주세요.");
+      return;
+    }
+    try {
+      const res = await useAxios.patch(`/user/${myInfo._id}`, {
+        first_name: first,
+        last_name: last,
+        email,
+        password,
+        phone,
+        city,
+        address,
+        gender: myInfo.gender,
+      });
+      console.log(res.data);
+      alert("수정 성공");
+      window.location.reload();
+    } catch (e) {
+      alert("정보 수정 실패");
     }
   };
   return (
@@ -97,49 +135,55 @@ const EditInfo = () => {
         <>
           <div className="edittext">
             <span>*내 정보 수정</span>
-            <button>수정하기</button>
+            <button onClick={onClickEdit}>수정하기</button>
           </div>
           <div className="row1">
             <input
               type="email"
-              value="kky8274@naver.com"
+              value={email}
               className="email"
               placeholder="이메일"
+              onChange={(e) => setEmail(e.target.value)}
               disabled
             />
             <input
               type="text"
-              value="010-1111-2222"
+              value={phone}
               className="phone"
               placeholder="전화번호"
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className="row2">
             <input
               type="text"
-              value="김"
+              value={last}
               className="lastname"
               placeholder="성"
+              onChange={(e) => setLast(e.target.value)}
             />
             <input
               type="text"
-              value="기열"
+              value={first}
               className="firstname"
               placeholder="이름"
+              onChange={(e) => setFirst(e.target.value)}
             />
           </div>
           <div className="row3">
             <input
               type="text"
-              value="서울"
+              value={city}
               className="city"
               placeholder="거주도시"
+              onChange={(e) => setCity(e.target.value)}
             />
             <input
               type="text"
-              value="공릉동 해오름 가동"
+              value={address}
               className="address"
               placeholder="주소"
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
         </>
@@ -151,7 +195,7 @@ const EditInfo = () => {
             onChange={onChangePw}
             className="pw"
           />
-          <button onClick={onClick} className="submit">
+          <button onClick={onClickPw} className="submit">
             확인하기
           </button>
         </div>
