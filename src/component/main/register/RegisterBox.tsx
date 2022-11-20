@@ -207,7 +207,7 @@ const RegisterBox = () => {
       localStorage.setItem("access_token", req.token.access_token);
       localStorage.setItem("refresh_token", req.token.refresh_token);
       alert("등록 완료");
-      navigate("/user");
+      navigate("/");
     } catch (e) {
       console.error(e);
       alert("회원가입 실패");

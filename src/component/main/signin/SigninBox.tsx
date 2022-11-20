@@ -69,7 +69,7 @@ const SigninBox = () => {
         .post(`${process.env.REACT_APP_SERVER}/auth/login`, data)
         .then((res) => res.data);
       alert("로그인 성공");
-      navigate("/user");
+      navigate("/");
       setAccessToken(req.access_token);
       localStorage.setItem("access_token", req.access_token);
       localStorage.setItem("refresh_token", req.refresh_token);
@@ -97,7 +97,7 @@ const SigninBox = () => {
 
       <p className="to_registration">
         처음 방문하셨나요?{" "}
-        <Link to="/user/registration" style={{ color: "green" }}>
+        <Link to="/registration" style={{ color: "green" }}>
           신규등록
         </Link>
       </p>

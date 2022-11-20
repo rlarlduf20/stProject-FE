@@ -9,7 +9,6 @@ import FreeBoard from "./page/board/FreeBoard";
 import ReferBoard from "./page/board/ReferBoard";
 import ReportBoard from "./page/board/ReportBoard";
 import QnABoard from "./page/board/QnABoard";
-import ArticleRegi from "./component/main/board/ArticleRegi";
 import FreeRegi from "./page/board/regi/FreeRegi";
 import NoticeRegi from "./page/board/regi/NoticeRegi";
 import ReferRegi from "./page/board/regi/ReferRegi";
@@ -18,18 +17,18 @@ import QnARegi from "./page/board/regi/QnARegi";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="client">
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/user" element={<Home />} />
-          <Route path="/user/login" element={<Signin />} />
-          <Route path="/user/registration" element={<Register />} />
-          <Route path="/user/my" element={<MyPage />} />
-          <Route path="/user/noticeb" element={<NoticeBoard />} />
-          <Route path="/user/referb" element={<ReferBoard />} />
-          <Route path="/user/reportb" element={<ReportBoard />} />
-          <Route path="/user/freeb" element={<FreeBoard />} />
-          <Route path="/user/qnab" element={<QnABoard />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Signin />} />
+          <Route path="/registration" element={<Register />} />
+          <Route path="/my" element={<MyPage />} />
+          <Route path="/noticeb" element={<NoticeBoard />} />
+          <Route path="/referb" element={<ReferBoard />} />
+          <Route path="/reportb" element={<ReportBoard />} />
+          <Route path="/freeb" element={<FreeBoard />} />
+          <Route path="/qnab" element={<QnABoard />} />
           <Route path="/noticeRegi" element={<NoticeRegi />} />
           <Route path="/referRegi" element={<ReferRegi />} />
           <Route path="/reportRegi" element={<ReportRegi />} />

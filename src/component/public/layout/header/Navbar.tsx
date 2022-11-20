@@ -13,6 +13,7 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Avatar from "@mui/material/Avatar";
+import AvatarImage from "../../../../image/avatar.png";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -106,11 +107,11 @@ const StyledNav = styled.nav`
 const navboxItem = [
   { text: "data", link: "/data" },
   { text: "소개", link: "#" },
-  { text: "공지사항", link: "/user/noticeb" },
-  { text: "자료실", link: "/user/referb" },
-  { text: "환경오염신고", link: "/user/reportb" },
-  { text: "자유게시판", link: "/user/freeb" },
-  { text: "QnA", link: "/user/qnab" },
+  { text: "공지사항", link: "/noticeb" },
+  { text: "자료실", link: "/referb" },
+  { text: "환경오염신고", link: "/reportb" },
+  { text: "자유게시판", link: "/freeb" },
+  { text: "QnA", link: "/qnab" },
 ];
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -159,7 +160,7 @@ const Navbar = () => {
       localStorage.removeItem("refresh_token");
       setAccessToken("");
       alert("로그아웃!");
-      navigate("/user");
+      navigate("/");
       window.location.reload();
       window.history.forward();
     } catch (e) {
@@ -168,7 +169,7 @@ const Navbar = () => {
   };
   return (
     <StyledNav>
-      <StyledLink to="/user">
+      <StyledLink to="/">
         <img src={Mark} alt="마크" />
         <p className="home_button">환경서비스 플랫폼</p>
       </StyledLink>
@@ -200,7 +201,7 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleToggle}
             >
-              <Avatar src="/broken-image.jpg" sx={{ width: 48, height: 48 }} />
+              <Avatar src={AvatarImage} sx={{ width: 48, height: 48 }} />
             </Button>
             <Popper
               open={open}
@@ -226,7 +227,7 @@ const Navbar = () => {
                         aria-labelledby="composition-button"
                         onKeyDown={handleListKeyDown}
                       >
-                        <StyledLink to="/user/my">
+                        <StyledLink to="/my">
                           <a>
                             <MenuItem onClick={handleClose}>
                               마이페이지
@@ -248,7 +249,7 @@ const Navbar = () => {
             <StyledLink to="/data">data</StyledLink>
           </div>
           <div className="signin">
-            <StyledLink to="/user/login">로그인</StyledLink>
+            <StyledLink to="/login">로그인</StyledLink>
           </div>
         </>
       )}
