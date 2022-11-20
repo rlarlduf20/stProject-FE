@@ -18,7 +18,7 @@ import QnARegi from "./page/board/regi/QnARegi";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="client">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/user" element={<Home />} />
