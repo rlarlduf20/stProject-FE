@@ -1,8 +1,4 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosRequestHeaders,
-  AxiosResponse,
-} from "axios";
+import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 
 const useAxios = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
@@ -36,11 +32,15 @@ useAxios.interceptors.response.use(
       config,
       response: { status },
     } = e;
+    if (status === 403) {
+      alert("해당 글의 수정/삭제 권한이 없습니다.");
+      return new Promise(() => {});
+    }
     if (status === 401) {
       const access = localStorage.getItem("access_token");
       if (access === null) {
         alert("인증에 실패했습니다. 다시 로그인해주세요");
-        window.location.replace("/user/login");
+        window.location.replace("/client/login");
       }
       const originalRequest = config;
       const refresh = localStorage.getItem("refresh_token");
@@ -60,7 +60,7 @@ useAxios.interceptors.response.use(
         alert("잘못된 접근입니다.");
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
-        window.location.replace("/user/login");
+        window.location.replace("/client/login");
       }
 
       return axios(originalRequest);

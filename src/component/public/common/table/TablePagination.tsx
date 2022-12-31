@@ -14,7 +14,6 @@ interface PageType {
 const TablePagination = ({ totalPage, pageChange }: PageType) => {
   const onChangePage = (e: any) => {
     const nowPageInt = parseInt(e.target.outerText);
-    console.log(e);
     pageChange(nowPageInt);
   };
   return (

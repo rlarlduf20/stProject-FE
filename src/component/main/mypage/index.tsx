@@ -121,7 +121,7 @@ const MyPageMain = () => {
               ) : radioValue === "editInfo" ? (
                 <EditInfo myInfo={myInfo} />
               ) : (
-                <EditPw />
+                <EditPw myInfo={myInfo} />
               )}
             </div>
           </MyPageInnerBox>

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import useAxios from "../../../hooks/useAxios";
 
 const EditPwBox = styled.div`
   display: flex;
@@ -46,7 +48,34 @@ const EditPwBox = styled.div`
   }
 `;
 
-const EditPw = () => {
+const EditPw = ({ myInfo }: { myInfo: any }) => {
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newConfirm, setNewConfirm] = useState("");
+
+  const onClickEditPw = async () => {
+    console.log(oldPassword, newPassword);
+    if (newPassword !== newConfirm) {
+      alert("비밀번호가 서로 다릅니다.");
+      return;
+    }
+    if (newPassword === "") {
+      alert("비밀번호를 입력해주세요");
+      return;
+    }
+    try {
+      await useAxios.patch(`/user/password/${myInfo._id}`, {
+        oldPassword,
+        newPassword,
+      });
+      alert("비밀번호 변경 성공");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      window.location.reload();
+    } catch (e) {
+      alert("현재 비밀번호가 틀립니다.");
+    }
+  };
   return (
     <EditPwBox>
       <p>*비밀번호 변경하기</p>
@@ -54,14 +83,23 @@ const EditPw = () => {
         placeholder="current password"
         className="currPw"
         type="password"
+        onChange={(e) => setOldPassword(e.target.value)}
       />
-      <input placeholder="new password" className="newPw" type="password" />
+      <input
+        placeholder="new password"
+        className="newPw"
+        type="password"
+        onChange={(e) => setNewPassword(e.target.value)}
+      />
       <input
         placeholder="confirm new password"
         className="confirmNewPw"
         type="password"
+        onChange={(e) => setNewConfirm(e.target.value)}
       />
-      <div className="editBtn">변경하기</div>
+      <div className="editBtn" onClick={onClickEditPw}>
+        변경하기
+      </div>
     </EditPwBox>
   );
 };

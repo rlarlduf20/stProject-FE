@@ -14,6 +14,16 @@ import NoticeRegi from "./page/board/regi/NoticeRegi";
 import ReferRegi from "./page/board/regi/ReferRegi";
 import ReportRegi from "./page/board/regi/ReportRegi";
 import QnARegi from "./page/board/regi/QnARegi";
+import EachFree from "./page/board/each/EachFree";
+import EachNotice from "./page/board/each/EachNotice";
+import EachQnA from "./page/board/each/EachQnA";
+import EachRefer from "./page/board/each/EachRefer";
+import EachReport from "./page/board/each/EachReport";
+import FreeEdit from "./page/board/edit/FreeEdit";
+import QnAEdit from "./page/board/edit/QnAEdit";
+import ReferEdit from "./page/board/edit/ReferEdit";
+import NoticeEdit from "./page/board/edit/NoticeEdit";
+import ReportEdit from "./page/board/edit/ReportEdit";
 
 const App = () => {
   return (
@@ -34,6 +44,16 @@ const App = () => {
           <Route path="/reportRegi" element={<ReportRegi />} />
           <Route path="/freeRegi" element={<FreeRegi />} />
           <Route path="/qnaRegi" element={<QnARegi />} />
+          <Route path="/eachFree" element={<EachFree />} />
+          <Route path="/eachNotice" element={<EachNotice />} />
+          <Route path="/eachQnA" element={<EachQnA />} />
+          <Route path="/eachRefer" element={<EachRefer />} />
+          <Route path="/eachReport" element={<EachReport />} />
+          <Route path="/freeEdit" element={<FreeEdit />} />
+          <Route path="/noticeEdit" element={<NoticeEdit />} />
+          <Route path="/qnaEdit" element={<QnAEdit />} />
+          <Route path="/referEdit" element={<ReferEdit />} />
+          <Route path="/reportEdit" element={<ReportEdit />} />
         </Route>
       </Routes>
     </BrowserRouter>

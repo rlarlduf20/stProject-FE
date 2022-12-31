@@ -4,6 +4,9 @@ import TableList from "../../../public/common/table/TableList";
 import TableType from "../../../public/common/table/TableType";
 import TableSearch from "../../../public/common/table/TableSearch";
 import TablePagination from "../../../public/common/table/TablePagination";
+import queryString from "query-string";
+import { Link, useLocation } from "react-router-dom";
+import useAxios from "../../../../hooks/useAxios";
 
 export const BoardMainContainer = styled.main`
   margin-top: 5.9375rem;
@@ -48,104 +51,35 @@ export const BoardInnerContainer = styled.div`
   }
 `;
 const NoticeBoardMain = () => {
-  const [tableList, setTableList] = useState([
-    {
-      indexNo: 1,
-      title: "프론트엔드 리액트",
-      writer: "kky8274@naver.com",
-      date: "7.9",
-      view: 0,
-    },
-    {
-      indexNo: 2,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 3,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 4,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 5,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 6,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 7,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 8,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 9,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 10,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 11,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 12,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-    {
-      indexNo: 13,
-      title: "백엔드 네스트",
-      writer: "minjun@google.com",
-      date: "7.11",
-      view: 18,
-    },
-  ]);
+  const [loading, setLoading] = useState(true);
+  const [noticeList, setNoticeList] = useState<any>();
+  const { search } = useLocation();
+
+  const getNoticeList = async () => {
+    try {
+      const res = await useAxios.get(`/notice`, {
+        params: {
+          title: queryString.parse(search).des,
+        },
+      });
+
+      setNoticeList(res.data);
+      setLoading(false);
+      console.log(res.data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    getNoticeList();
+  }, []);
 
   const [totalPage, setTotalPage] = useState(1);
   useEffect(() => {
-    setTotalPage(Math.trunc((tableList.length - 1) / 5 + 1));
-  }, [tableList]);
+    if (noticeList !== undefined) {
+      setTotalPage(Math.trunc((noticeList.length - 1) / 5 + 1));
+    }
+  }, [noticeList]);
   const [currentPage, setCurrentPage] = useState(1);
   const pageChange = (p: number) => {
     setCurrentPage(p);
@@ -153,17 +87,30 @@ const NoticeBoardMain = () => {
   return (
     <BoardMainContainer>
       <BoardInnerContainer>
-        <TableType title="공지사항" route="noticeRegi" />
-        {tableList
-          .slice((currentPage - 1) * 5, (currentPage - 1) * 5 + 5)
-          .map((list, index: number) => (
-            <TableList key={index} list={list} />
-          ))}
-        <TablePagination
-          totalPage={totalPage === 0 ? 1 : totalPage}
-          pageChange={pageChange}
-        />
-        <TableSearch />
+        {loading ? null : (
+          <>
+            <TableType title="공지사항" route="noticeRegi" />
+            {noticeList
+              .slice((currentPage - 1) * 5, (currentPage - 1) * 5 + 5)
+              .map((list: any, index: number) => (
+                <Link
+                  to={`/eachNotice?id=${list._id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                  key={index}
+                >
+                  <TableList
+                    list={list}
+                    index={index + (currentPage - 1) * 5}
+                  />
+                </Link>
+              ))}
+            <TablePagination
+              totalPage={totalPage === 0 ? 1 : totalPage}
+              pageChange={pageChange}
+            />
+            <TableSearch type="noticeb" />
+          </>
+        )}
       </BoardInnerContainer>
     </BoardMainContainer>
   );

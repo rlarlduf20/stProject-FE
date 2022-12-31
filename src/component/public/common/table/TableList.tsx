@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 const BoardListBox = styled.div`
@@ -7,6 +6,7 @@ const BoardListBox = styled.div`
   border-bottom: 0.0625rem solid #e2e2e2;
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
   @media (max-width: 37.5rem) {
     font-size: 0.75rem;
   }
@@ -34,20 +34,21 @@ interface ListType {
   list: {
     indexNo: number;
     title: string;
-    writer: string;
-    date: string;
-    view: number;
+    author: any;
+    updatedAt: string;
+    viewCount: number;
   };
+  index: number;
 }
 
-const TableList = ({ list }: ListType) => {
+const TableList = ({ list, index }: ListType) => {
   return (
     <BoardListBox>
-      <div className="tr_indexNo">{list.indexNo}</div>
+      <div className="tr_indexNo">{index + 1}</div>
       <div className="tr_title">{list.title}</div>
-      <div className="tr_writer">{list.writer}</div>
-      <div className="tr_date">{list.date}</div>
-      <div className="tr_view">{list.view}</div>
+      <div className="tr_writer">{list.author.email}</div>
+      <div className="tr_date">{list.updatedAt.slice(5, 10)}</div>
+      <div className="tr_view">{list.viewCount}</div>
     </BoardListBox>
   );
 };
